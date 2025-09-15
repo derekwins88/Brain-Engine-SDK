@@ -14,9 +14,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+
+      - name: Install system deps (minisat)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y minisat || echo "minisat not available; continuing"
 
       - name: Install
         run: |
@@ -33,17 +39,28 @@ jobs:
         run: pytest
 
       - name: Build Day-2 artifacts (proof + resonance)
-        run: |
-          python demo_day2.py --proof --resonance
+        run: python demo_day2.py --proof --resonance
 
-      - name: Upload artifacts (images, CSV, Lean, TeX)
+      - name: Build Day-3 artifacts (dimacs + qubo + resonance)
+        run: python demo_day3.py
+
+      - name: Build Day-4 report (html)
+        run: python demo_day4.py
+
+      # ✅ Give each artifact a unique name to avoid 409 conflicts
+      - name: Upload artifacts (per Python)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: day2-artifacts
+          name: be-artifacts-py${{ matrix.python-version }}-${{ github.run_attempt }}
           path: |
             docs/resonance_wave.png
             docs/resonance_states.csv
+            docs/proof.cnf
+            docs/qubo.json
             docs/proof_lean_sketch.lean
             docs/proof_draft.tex
+            docs/report.html
+            capsules/*.json
           if-no-files-found: warn
+          overwrite: true

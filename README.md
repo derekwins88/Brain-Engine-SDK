@@ -56,3 +56,8 @@ python demo_day2.py --resonance
 Artifacts: docs/resonance_wave.png, docs/resonance_states.csv
 
 CI uploads the PNG/CSV/Lean/TeX as artifacts on every push.
+
+## Day-4: Minisat + HTML Report
+- CI installs minisat on Linux; runner gracefully falls back if not present.
+- `demo_day4.py` writes `docs/report.html` (embeds PNG + links CNF/TeX/Lean/CSV).
+- Artifacts uploaded separately for each Python version so uploads never clash.
