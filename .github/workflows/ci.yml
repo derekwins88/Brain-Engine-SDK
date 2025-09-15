@@ -32,12 +32,18 @@ jobs:
       - name: Tests (pytest)
         run: pytest
 
-      - name: Upload sample artifacts
+      - name: Build Day-2 artifacts (proof + resonance)
+        run: |
+          python demo_day2.py --proof --resonance
+
+      - name: Upload artifacts (images, CSV, Lean, TeX)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sample-capsules
+          name: day2-artifacts
           path: |
-            capsules/*.json
-            capsules/*.ndjson
-          if-no-files-found: ignore
+            docs/resonance_wave.png
+            docs/resonance_states.csv
+            docs/proof_lean_sketch.lean
+            docs/proof_draft.tex
+          if-no-files-found: warn

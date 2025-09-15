@@ -30,3 +30,29 @@ Next (Week-2 hints)
 •add --export-lean & --export-tex in a proof/ module
 •add resonance_deck.py PNG wave + CSV states
 •add quantum/qubo_exporter.py stub + adapter interface
+
+## Day-2: Proof exporters + Resonance Deck
+
+### Proof exporters
+- `brain_engine/proof/export_lean.py` emits a minimal Lean4 skeleton from a Capsule.
+- `brain_engine/proof/export_tex.py` emits a LaTeX draft page.
+- `brain_engine/proof/entropy_collapse_bridge.py` converts motif votes → SAT-ish shape and ∆Φ gates.
+
+Run:
+```bash
+python demo_day2.py --proof
+```
+
+Artifacts: docs/proof_lean_sketch.lean, docs/proof_draft.tex
+
+### Resonance Deck
+- `brain_engine/resonance/resonance_deck.py` plots ∆Φ waveform and writes a CSV of entropy states.
+
+Run:
+```bash
+python demo_day2.py --resonance
+```
+
+Artifacts: docs/resonance_wave.png, docs/resonance_states.csv
+
+CI uploads the PNG/CSV/Lean/TeX as artifacts on every push.
