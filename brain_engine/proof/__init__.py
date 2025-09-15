@@ -3,6 +3,7 @@ from __future__ import annotations
 from .entropy_collapse_bridge import gates_from_delta_phi, sat_shape_from_motifs
 from .export_lean import lean_from_capsule
 from .export_tex import tex_from_capsule
+from .minisat_runner import have_minisat, run_minisat_dimacs
 
 
 def dimacs_from_cnf(n: int, cnf: list[list[int]]) -> str:
@@ -24,4 +25,6 @@ __all__ = [
     "tex_from_capsule",
     "dimacs_from_cnf",
     "minisat_run_stub",
+    "run_minisat_dimacs",
+    "have_minisat",
 ]
