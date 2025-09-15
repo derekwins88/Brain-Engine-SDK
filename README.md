@@ -61,3 +61,8 @@ CI uploads the PNG/CSV/Lean/TeX as artifacts on every push.
 - CI installs minisat on Linux; runner gracefully falls back if not present.
 - `demo_day4.py` writes `docs/report.html` (embeds PNG + links CNF/TeX/Lean/CSV).
 - Artifacts uploaded separately for each Python version so uploads never clash.
+
+## Day-5: Unified Builder + Report JSON + Lean seed
+- `be build all --out docs` writes all artifacts (PNG/CSV/CNF/Lean/TeX/QUBO/HTML/JSON).
+- CI runs the unified builder and uploads artifacts with unique names per Py version.
+- Lean project seed added under `lean/` for local math work (CI does not compile Lean yet).
