@@ -1,0 +1,1 @@
+-- This file is overwritten by docs/proof_lean_sketch.lean when you sync locally.

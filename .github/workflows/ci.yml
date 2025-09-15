@@ -38,14 +38,8 @@ jobs:
       - name: Tests (pytest)
         run: pytest
 
-      - name: Build Day-2 artifacts (proof + resonance)
-        run: python demo_day2.py --proof --resonance
-
-      - name: Build Day-3 artifacts (dimacs + qubo + resonance)
-        run: python demo_day3.py
-
-      - name: Build Day-4 report (html)
-        run: python demo_day4.py
+      - name: Build artifacts (unified)
+        run: be build all --out docs
 
       # ✅ Give each artifact a unique name to avoid 409 conflicts
       - name: Upload artifacts (per Python)
@@ -61,6 +55,7 @@ jobs:
             docs/proof_lean_sketch.lean
             docs/proof_draft.tex
             docs/report.html
+            docs/report.json
             capsules/*.json
           if-no-files-found: warn
           overwrite: true
