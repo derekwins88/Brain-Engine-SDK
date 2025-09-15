@@ -3,10 +3,8 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
+
 # Important: Day-2 constraint → use matplotlib (single plot, no style/colors)
-import matplotlib.pyplot as plt
-
-
 def _state(delta: float, collapse_thr: float = 0.85, recursive_thr: float = 0.45) -> str:
     if delta >= collapse_thr:
         return "collapse"
@@ -17,6 +15,7 @@ def _state(delta: float, collapse_thr: float = 0.85, recursive_thr: float = 0.45
 
 def render_resonance_wave(delta_phi_series: list[float], out_png: str | Path) -> Path:
     """Render a simple waveform of ∆Φ over index."""
+    import matplotlib.pyplot as plt  # local import, runtime only
     out = Path(out_png)
     out.parent.mkdir(parents=True, exist_ok=True)
 
@@ -28,7 +27,7 @@ def render_resonance_wave(delta_phi_series: list[float], out_png: str | Path) ->
     plt.title("Resonance Wave (∆Φ)")
     plt.xlabel("Index")
     plt.ylabel("Delta Phi")
-    plt.savefig(out, dpi=160, bbox_inches="tight")
+    plt.savefig(str(out), dpi=160, bbox_inches="tight")
     plt.close()
     return out
 
